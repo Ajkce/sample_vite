@@ -22,10 +22,7 @@ steps:
   displayName: Cache NPM packages
 - script: npm install --cache $(npm_config_cache)
   displayName: NPM Install Dependencies
-- script: |
-    npm cache ls
-    npm cache verify
-  displayName: NPM Show cache
+
 
 - script: |
     npm run build
