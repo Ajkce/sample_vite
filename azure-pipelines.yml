@@ -22,7 +22,7 @@ steps:
   displayName: Cache NPM packages
 - script: npm install --cache $(npm_config_cache)
   displayName: NPM Install Dependencies
-
+- script: pwd $(npm_config_cache)
 
 - script: |
     npm run build
