@@ -15,7 +15,18 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
+- task: Cache@2
+  inputs:
+    key: 'package-lock.json'
+    path: $(npm_config_cache)
+  displayName: Cache NPM packages
+- script: npm ci --cache $(npm_config_cache)
+  displayName: NPM Install Dependencies
 - script: |
-    npm install
+    npm cache ls
+    npm cache verify
+  displayName: NPM Show cache
+
+- script: |
     npm run build
-  displayName: 'npm install and build'
+  displayName: 'npm build'
