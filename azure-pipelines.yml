@@ -24,11 +24,7 @@ steps:
     npm run build
   displayName: 'npm build'
 
-- task: DownloadBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'dist'
-    downloadPath: '$(System.ArtifactsDirectory)'
-    patterns: |
-      **/*.zip
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
