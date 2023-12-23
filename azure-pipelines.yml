@@ -19,11 +19,12 @@ steps:
 - script: npm install 
   displayName: NPM Install Dependencies
 
-
+- script: npm run build 
+  displayName: NPM Install Dependencies
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
