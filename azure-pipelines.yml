@@ -29,9 +29,5 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: dist
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+
 
