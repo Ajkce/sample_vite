@@ -2,18 +2,8 @@ version: 0.0
 os: linux
 files:
   - source: dist/
-    destination: /var/www/html/
-    overwrite: true
-file_exists_behavior: OVERWRITE
+    destination: /var/www/samplevite
 hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
+  ApplicationStart:
+    - location: deploy-scripts/application-start-hook.sh
       timeout: 300
-      runas: root
-    - location: scripts/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root
