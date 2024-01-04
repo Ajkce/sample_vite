@@ -1,0 +1,19 @@
+version: 0.0
+
+os: linux
+files:
+  - source: /
+    destination: /var/www/samplevite
+permissions:
+  - object: /var/www/samplevite
+    pattern: "**"
+    mode: "0755"
+    owner: root
+    group: root
+    type: 
+      - files
+      - directory
+hooks:
+  ApplicationStart: 
+    - location: deploy-scripts/application-start.sh
+      timeout: 300
