@@ -19,4 +19,4 @@ artifacts:
   files:
     - "dist/**/*"
     - appspec.yml
-    - "scripts/**/*"
+    - "deploy-scripts/**/*"
