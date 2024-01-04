@@ -1,19 +1,17 @@
 version: 0.0
-
 os: linux
 files:
   - source: dist/
-    destination: /var/www/samplevite
-permissions:
-  - object: /var/www/samplevite
-    pattern: "**"
-    mode: "0755"
-    owner: root
-    group: root
-    type:
-      - files
-      - directory
+    destination: /var/www/html/
 hooks:
-  ApplicationStart:
-    - location: deploy-scripts/application-start.sh
+  BeforeInstall:
+    - location: scripts/install_dependencies
       timeout: 300
+      runas: root
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
