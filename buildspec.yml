@@ -1,22 +1,14 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: latest
-    commands:
-      - npm install
   pre_build:
     commands:
-      - echo "we are in the pre build phase"
+      - echo ${DOCKERHUB_TOKEN} | docker login -u ${DOCKERHUB_USER} --password-stdin
   build:
     commands:
-      - npm run build
+      - docker build -t samplevite:latest .
   post_build:
     commands:
       - echo "we are in the post build phase"
-artifacts:
-  files:
-    - "dist/**/*"
-    - appspec.yml
-    - "deploy-scripts/**/*"
+      - docker tag samplevite:latest ${DOCKERHUB_USER}/samplevite:latest
+      - docker push ${DOCKERHUB_USER}/samplevite:latest

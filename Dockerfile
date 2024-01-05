@@ -12,5 +12,5 @@ RUN npm run build
 
 FROM nginx
 
-COPY --from=builder /app/distb /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
