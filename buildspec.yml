@@ -1,13 +1,14 @@
 version: 0.2
 
-# env:
-#   variables:
-#     DOCKERHUB_USER: ajayakce
-
 env:
-  secrets-manager:
-    DOCKERHUB_TOKEN: dockerhub:token
-    DOCKERHUB_USER: dockerhub:user
+  variables:
+    DOCKERHUB_USER: ajayakce
+    DOCKERHUB_TOKEN: dckr_pat_HXLIcK_8rKy1h25lsOaShUZwI_c
+
+# env:
+#   secrets-manager:
+#     DOCKERHUB_TOKEN: dockerhub:token
+#     DOCKERHUB_USER: dockerhub:user
 
 phases:
   pre_build:
