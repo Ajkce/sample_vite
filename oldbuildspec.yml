@@ -1,0 +1,33 @@
+version: 0.2
+
+env:
+  variables:
+    DOCKERHUB_USER: ajayakce
+    DOCKERHUB_TOKEN: dckr_pat_HXLIcK_8rKy1h25lsOaShUZwI_c
+    ECR_REPO_NAME: samplevite
+
+# env:
+#   secrets-manager:
+#     DOCKERHUB_TOKEN: dockerhub:token
+#     DOCKERHUB_USER: dockerhub:user
+
+phases:
+  pre_build:
+    commands:
+      # Docker Hub Login
+      - echo ${DOCKERHUB_TOKEN} | docker login -u ${DOCKERHUB_USER} --password-stdin
+
+      #ECR Login
+      # You can use ${AWS_REGION} built in environment variable instead of your region name
+      - ECR_MAIN_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+      - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_MAIN_URI}
+
+      - ECR_IMAGE_URI="${ECR_MAIN_URI}/${ECR_REPO_NAME}:latest"
+  build:
+    commands:
+      - docker build -t samplevite:latest .
+  post_build:
+    commands:
+      - echo "we are in the post build phase"
+      - docker tag samplevite:latest ${ECR_IMAGE_URI}
+      - docker push ${ECR_IMAGE_URI}
