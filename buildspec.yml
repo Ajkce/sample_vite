@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     ECR_REPO_NAME: samplevite
+    AWS_ACCOUNT_ID: "891377277172"
 
 phases:
   pre_build:
@@ -14,7 +15,7 @@ phases:
       - ECR_MAIN_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
       - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_MAIN_URI}
 
-      - ECR_IMAGE_URI="891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:latest"
+      - ECR_IMAGE_URI="${ECR_MAIN_URI}/${ECR_REPO_NAME}:latest"
   build:
     commands:
       - docker build -t samplevite:latest .
