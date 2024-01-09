@@ -17,9 +17,9 @@ phases:
       - ECR_IMAGE_URI="${ECR_MAIN_URI}/${ECR_REPO_NAME}:latest"
   build:
     commands:
-      - docker build -t myecr .
-      - docker tag myecr:latest 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/myecr:latest
-      - docker push 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/myecr:latest
+      - docker build -t samplevite:latest .
+      - docker tag samplevite:latest 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:latest
+      - docker push 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:latest
   post_build:
     commands:
       - echo post build phase completed
