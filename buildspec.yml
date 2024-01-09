@@ -12,8 +12,8 @@ phases:
   build:
     commands:
       - docker build -t samplevite:latest
-      - docker tag samplevite:latest ${DOCKERHUB_USER}/samplevite:latest
-      - docker push ${DOCKERHUB_USER}/samplevite:latest
+      - docker tag samplevite:latest ${DOCKERHUB_USER}/sampleviteproject:latest
+      - docker push ${DOCKERHUB_USER}/sampleviteproject:latest
   post_build:
     commands:
       - echo post build phase completed
