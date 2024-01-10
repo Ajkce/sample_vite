@@ -14,9 +14,10 @@ phases:
       - echo Logging in into ECR...
       - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com
 
-      - ECR_IMAGE_URI="891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:${CODEBUILD_RESOLVE_SOURCE_VERSION:0:8}"
+      - ECR_IMAGE_URI="891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:${CODEBUILD_SOURCE_VERSION:0:8}"
   build:
     commands:
+      - echo "ECR_IMAGE_URI:${ECR_IMAGE_URI}"
       - docker build -t samplevite:latest .
       - docker tag samplevite:latest ${ECR_IMAGE_URI}
       - docker push ${ECR_IMAGE_URI}
