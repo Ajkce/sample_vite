@@ -17,15 +17,15 @@ phases:
       - ECR_IMAGE_URI="891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:${CODEBUILD_SOURCE_VERSION:0:8}"
   build:
     commands:
-      - echo "ECR_IMAGE_URI:${ECR_IMAGE_URI}"
+      - echo "ECR_IMAGE_URI:${CODEBUILD_SOURCE_VERSION:0:8}"
       - docker build -t samplevite:latest .
-      - docker tag samplevite:latest ${ECR_IMAGE_URI}
-      - docker push ${ECR_IMAGE_URI}
+      - docker tag samplevite:latest 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:${CODEBUILD_SOURCE_VERSION:0:8}
+      - docker push 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:${CODEBUILD_SOURCE_VERSION:0:8}
   post_build:
     commands:
       - echo post build phase started
       # Generate image definitions for ECS
-      - printf '[{"name":"samplevite", "imageUri":"%s"}]' ${ECR_IMAGE_URI} > imagedefinitions.json
+      - printf '[{"name":"samplevite", "imageUri":"891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:%s"}]' ${CODEBUILD_SOURCE_VERSION:0:8} > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
