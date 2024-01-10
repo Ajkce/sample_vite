@@ -22,4 +22,9 @@ phases:
       - docker push 891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:latest
   post_build:
     commands:
-      - echo post build phase completed
+      - echo post build phase started
+      # Generate image definitions for ECS
+      - printf '[{"name":"samplevite", "imageUri":"891377277172.dkr.ecr.ap-southeast-2.amazonaws.com/samplevite:latest"}]' > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
