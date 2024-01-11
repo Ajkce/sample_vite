@@ -30,7 +30,7 @@ function App() {
         autmatically
       </p>
 
-      <button>Application version 5</button>
+      <button>Application version 6</button>
       <h1>I am testing this again</h1>
     </>
   );
