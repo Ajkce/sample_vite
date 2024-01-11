@@ -10,8 +10,8 @@ COPY . .
 
 RUN npm run build
 
-FROM public.ecr.aws/docker/library/nginx
-# FROM public.ecr.aws/docker/library/ubuntu
+# FROM public.ecr.aws/docker/library/nginx
+FROM public.ecr.aws/docker/library/ubuntu
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
